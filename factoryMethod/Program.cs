@@ -2,15 +2,16 @@
 {
     static void Main()
     {
-        INotificationFactory creator = new MobileFactory();
+        //абстрактная фабрика
+        INotificationFactory creator = new MobileFactory(); // мобильные уведы
         INotification push = creator.CreateFirstType();
         INotification sms = creator.CreateSecondType();
 
-        creator = new WebFactory();
+        creator = new WebFactory(); // веб уведы
         INotification browser = creator.CreateFirstType();
         INotification email = creator.CreateSecondType();
 
-        creator = new DesktopFactory();
+        creator = new DesktopFactory(); //десктоп уведы
         INotification systemTray = creator.CreateFirstType();
         INotification toast = creator.CreateSecondType();
 
