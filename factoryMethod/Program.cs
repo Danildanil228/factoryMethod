@@ -1,28 +1,23 @@
-﻿class Program
-{
-    static void Main()
-    {
-        //абстрактная фабрика
-        INotificationFactory creator = new MobileFactory(); // мобильные уведы
-        INotification push = creator.CreateFirstType();
-        INotification sms = creator.CreateSecondType();
+//абстрактная фабрика
+INotificationFactory creator = new MobileFactory(); // мобильные уведы
+INotification push = creator.CreateFirstType();
+INotification sms = creator.CreateSecondType();
 
-        creator = new WebFactory(); // веб уведы
-        INotification browser = creator.CreateFirstType();
-        INotification email = creator.CreateSecondType();
+creator = new WebFactory(); // веб уведы
+INotification browser = creator.CreateFirstType();
+INotification email = creator.CreateSecondType();
 
-        creator = new DesktopFactory(); //десктоп уведы
-        INotification systemTray = creator.CreateFirstType();
-        INotification toast = creator.CreateSecondType();
+creator = new DesktopFactory(); //десктоп уведы
+INotification systemTray = creator.CreateFirstType();
+INotification toast = creator.CreateSecondType();
 
-        push.Send();
-        sms.Send();
-        browser.Send();
-        email.Send();
-        systemTray.Send();
-        toast.Send();
-    }
-}
+push.Send();
+sms.Send();
+browser.Send();
+email.Send();
+systemTray.Send();
+toast.Send();
+
 interface INotification
 {
     void Send();
