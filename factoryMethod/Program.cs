@@ -9,12 +9,14 @@ interface INotificationFactory
     INotification CreateSecondType();
 }
 
+
+//создание отдельного уведомления
+
 class PushNotification : INotification
 {
     public void Send() => Console.WriteLine("Push отправлен");
 }
 
-//создание отдельного уведомления
 class SMSNotification : INotification
 {
     public void Send() => Console.WriteLine("SMS отправлен");
