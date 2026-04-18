@@ -1,26 +1,12 @@
-//абстрактная фабрика
-INotificationFactory creator = new MobileFactory(); // мобильные уведы
-INotification push = creator.CreateFirstType();
-INotification sms = creator.CreateSecondType();
-
-creator = new WebFactory(); // веб уведы
-INotification browser = creator.CreateFirstType();
-INotification email = creator.CreateSecondType();
-
-creator = new DesktopFactory(); //десктоп уведы
-INotification systemTray = creator.CreateFirstType();
-INotification toast = creator.CreateSecondType();
-
-push.Send();
-sms.Send();
-browser.Send();
-email.Send();
-systemTray.Send();
-toast.Send();
-
 interface INotification
 {
     void Send();
+}
+
+interface INotificationFactory
+{
+    INotification CreateFirstType();
+    INotification CreateSecondType();
 }
 
 class PushNotification : INotification
@@ -28,6 +14,7 @@ class PushNotification : INotification
     public void Send() => Console.WriteLine("Push отправлен");
 }
 
+//создание отдельного уведомления
 class SMSNotification : INotification
 {
     public void Send() => Console.WriteLine("SMS отправлен");
@@ -54,13 +41,7 @@ class ToastNotification : INotification
     public void Send() => Console.WriteLine("Toast отправлен");
 }
 
-
-interface INotificationFactory
-{
-    INotification CreateFirstType();
-    INotification CreateSecondType();
-}
-
+//для каждой фабрики свои уведомления
 class MobileFactory : INotificationFactory
 {
     public INotification CreateFirstType() => new PushNotification();
@@ -78,4 +59,34 @@ class DesktopFactory : INotificationFactory
     public INotification CreateFirstType() => new SystemTrayNotification();
     public INotification CreateSecondType() => new ToastNotification();
 }
+
+
+//абстрактная фабрика
+INotificationFactory creator = new MobileFactory(); // мобильные уведы
+INotification push = creator.CreateFirstType();
+INotification sms = creator.CreateSecondType();
+
+creator = new WebFactory(); // веб уведы
+INotification browser = creator.CreateFirstType();
+INotification email = creator.CreateSecondType();
+
+creator = new DesktopFactory(); //десктоп уведы
+INotification systemTray = creator.CreateFirstType();
+INotification toast = creator.CreateSecondType();
+
+push.Send();
+sms.Send();
+browser.Send();
+email.Send();
+systemTray.Send();
+toast.Send();
+
+
+
+
+
+
+
+
+
 
